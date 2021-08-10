@@ -1,0 +1,299 @@
+Module Module1
+    Dim datos() As String = {"Física General", "Estadística", "Calculo", "Contabilidad", "Programación 1"} '***********Esta Variable Almacena Los Nombres De Los Cursos*************
+    Dim NOMBRES(14) As String '**************Esta Variable Almacena Los Nombres*******************
+    Dim notas(5, 14) As Decimal '*****************Esta Variable Almacena Las Notas*****************
+    '**********************Bloke De Ingresar Nombre*****************************
+    Sub ingresar()
+        '************Inicio Del For Para Ingresar Nombres**************
+        For index = 0 To 14 '********************Este For Permite Agregar La Cantidad De Nombre****************
+            Console.WriteLine("Ingrese Nombre Del Alumno... " & index + 1) '************Esta Línea Pide Los Nombres****************
+            NOMBRES(index) = Console.ReadLine() '**************Esta Line Almacena Los Nombres Que Ingreso**********
+
+        Next
+        '*****************Este Es El Fin De For Para Ingresar Nombre*****************
+        Console.WriteLine()
+        '**********************Este Es El Inicio De Ordenamiento Los Nombres Alfabéticamente*************
+        Dim temporal As String '****************Esta Variable Es Para Guardar Temporalmente Los Datos Para Luego Hacer Un Ordenamiento*************
+        Dim tam As Integer = 14 '**********Esta Variable Es Para Saber Cuentos Datos Tiene Buscar Su Orden**************
+        For i = 1 To tam - 1
+            For j = 0 To tam - i
+                If NOMBRES(j) > NOMBRES(j + 1) Then
+                    temporal = NOMBRES(j)
+                    NOMBRES(j) = NOMBRES(j + 1)
+                    NOMBRES(j + 1) = temporal
+                End If
+            Next
+        Next
+        '*****************************Este Es El Fin Del Ordenamiento De Los Nombres Alfabéticamente***********
+        Console.WriteLine()
+    End Sub
+    Sub ingresarnota()
+        '*************************Inicio Del Bloke Ingresar Notas De Notas******************************
+        For y = 0 To 14 '**************Este For Sirve Para Orientar Las Notas Así Abajo***********
+
+            For x = 0 To 4 '***********Este For Sirve Para Orientar Las Notas Hacia Los Lados *****************
+
+                Console.WriteLine("Ingrese Nota " & "De " & (" *") & NOMBRES(y) & ("* ") & " De La Clase De " & datos(x) & "...") '*************Esta Línea Pide Los Que Ingrese Las Notas*********
+                notas(x, y) = Console.ReadLine() '********Esta Línea Almacena Las Notas Y Las Ordena***********
+
+            Next
+
+            notas(5, y) = (notas(0, y) + notas(1, y) + notas(2, y) + notas(3, y) + notas(4, y)) / 5 '*******************Esta Línea De Código Se Encarga De Sacar El Promedio De Las Notas Ingresadas*********************
+
+        Next
+        '*************************Fin Del Bloke Ingresar Notas***************************
+    End Sub
+    Sub mostar()
+        '**********************Inicio De Bloke De La Tabla De Los Arreglos*****************************
+        Console.WriteLine()
+        Console.WriteLine("Las Notas Ingresadas Son: ")
+        Console.WriteLine()
+        Console.BackgroundColor = ConsoleColor.White '*****************esta línea es la que la el color a el relleno de la línea**********************
+        Console.ForegroundColor = ConsoleColor.Black '***********************Esta Línea Es La Que Da El Color A Las Letras ***********
+        Console.WriteLine("Nombres" & Chr(09) & "        █" & "Física General " & "█" & "Estadística " & "   █" & "Calculo " & "       █" & "Contabilidad " & "  █" & "Programación 1 " & "█" & "Promedio       ") '**************esta lina le pone los titulos de los cursos a la tabla de datos
+        For y = 0 To 14 '**********Este For Es El Que Ordena Los Nombres Y Notas Hacia Abajo*******************
+            Console.BackgroundColor = ConsoleColor.Yellow
+            Console.ForegroundColor = ConsoleColor.Black
+            Console.Write(NOMBRES(y) & Chr(09) & Chr(9) & "█") '*************Areglo Unidimiencional************
+            For x = 0 To 5 '*************Este For Ordena Las Notas Horizontalmente*****************
+                Console.BackgroundColor = ConsoleColor.Green
+                Console.ForegroundColor = ConsoleColor.Black
+                Console.Write(notas(Chr(9) & x, y) & Chr(09) & Chr(09) & "█") '******************Areglo Bidimencional*****************
+            Next
+            Console.WriteLine()
+        Next
+        '************************Fin De Bloke De La Tabla De Los Arreglos*********************************************
+    End Sub
+    Sub modificard()
+        '************************Inicio De Bloke De Modificar Nombres********************
+        Dim modif As Integer '******************Esta Variable Va A Guardar El Nombre Que Desea Modificar*******************
+        For x = 0 To 14 '********************Esta Variable Va A Buscar La Nombre Que Desea Cambiar********************
+            Console.BackgroundColor = ConsoleColor.Black
+            Console.ForegroundColor = ConsoleColor.Blue
+            Console.WriteLine(x + 1 & " " & NOMBRES(x))
+            Console.BackgroundColor = ConsoleColor.Black
+            Console.ForegroundColor = ConsoleColor.White
+        Next
+        Console.WriteLine("Que Nombre Desea Cambiar... ")
+        Console.WriteLine()
+        Console.WriteLine("* Para Seleccionar Un Alumno Debe De Presiona Un Número Que Le Aparece A La Al Lado Del Nombre * ")
+        Console.WriteLine()
+        modif = Console.ReadLine '***************Esta Línea Buscar El Dato Que Desea Cambiar**********************
+        Console.WriteLine(" Que Nombre Es Correcto... ")
+        NOMBRES(modif - 1) = Console.ReadLine '*****************Esta Línea Va A Eliminar En Antiguo Nombre Y Va A Cambiarlo Por El Nuevo*********************
+        Console.WriteLine("El Nombre Ha Sido Corregido")
+        Console.WriteLine()
+        Console.WriteLine()
+    End Sub
+    Sub modificardnota()
+        '*******************inicio de bloke de modificar el cuadro notas de un alumno********************
+        Dim Nombre As Integer '**************************Esta Variable Sirve Para Buscar Al Alumno Que Desea Eliminar La Nota*************
+        Console.WriteLine()
+        Console.WriteLine("Nombres De Los Alumnos... ")
+        Console.WriteLine()
+        For x = 0 To 14 '***************Este For Va A Buscar Entre Los 15 Alumno Para Saber De Que Línea Debe Modificar La Nota
+            Console.BackgroundColor = ConsoleColor.Black
+            Console.ForegroundColor = ConsoleColor.Blue
+            Console.WriteLine(x + 1 & " " & NOMBRES(x))
+            Console.BackgroundColor = ConsoleColor.Black
+            Console.ForegroundColor = ConsoleColor.White
+        Next
+        Console.WriteLine("De Que Alumno Desea Modificar Nota... ")
+        Console.WriteLine()
+        Console.WriteLine("* Para Seleccionar Un Alumno Debe De Presionar Un Número Que Le Aparece A La Al Lado Del Nombre * ")
+        Console.WriteLine()
+        Nombre = Console.ReadLine
+        Console.WriteLine("Que Notas Son Las Correcta... ")
+        Console.WriteLine("Fisica General")
+        notas(0, Nombre - 1) = Console.ReadLine '^^
+        Console.WriteLine("Estadistica")
+        notas(1, Nombre - 1) = Console.ReadLine '^^
+        Console.WriteLine("Calculo")
+        notas(2, Nombre - 1) = Console.ReadLine '^^      ^^^^^^^^^^^^Estas Líneas Es La Que Va A Eliminar La Nota Del Alumno Para Poderla Cambiar Por La Nueva^^^^^^^^^^^^^^
+        Console.WriteLine("Contabilidad")
+        notas(3, Nombre - 1) = Console.ReadLine '^^
+        Console.WriteLine("Programación 1")
+        notas(4, Nombre - 1) = Console.ReadLine '^^
+        Console.WriteLine("La Nota Ha Sido Corregida")
+        Console.WriteLine()
+        notas(5, Nombre - 1) = ((notas(0, Nombre - 1) + notas(1, Nombre - 1) + notas(2, Nombre - 1) + notas(3, Nombre - 1) + notas(4, Nombre - 1))) / 5 '********************esta linea es la que saca el promedio cuando se agregan nuevas notas 
+        '*******************Fin De Bloke De Modificar Las Cuatro Notas De Un Alumno************************
+    End Sub
+    Sub midificarunanota()
+        '***************************** Inicio De Bloke De Modificar Una Notas A Un Alumno******************
+        Dim Nombre As Integer '*****************Esta Variable Es La Que Va A Buscar A Que Alumno Va A Eliminar La Nota*****************
+        Dim pedir As Integer '**************Esta Variable Esta La Que Va A Pedir A La Nueva Nota Que Va A Ingresar A El Alumno Seleccionado************
+        Console.WriteLine()
+        Console.WriteLine("Nombres De Los Alumnos")
+        Console.WriteLine()
+        For x = 0 To 14 '***************Este For Va A Buscar Entre Los 15 Alumno Para Saber De Que Línea Debe Modificar La Nota*******************
+            Console.BackgroundColor = ConsoleColor.Black
+            Console.ForegroundColor = ConsoleColor.Blue
+            Console.WriteLine(x + 1 & " " & NOMBRES(x)) '*************Esta Línea Va A Cambiar La Nota Mientras Escoge Que Nota Le Va Aponer De Nuevo***********
+            Console.BackgroundColor = ConsoleColor.Black
+            Console.ForegroundColor = ConsoleColor.White
+        Next
+        Console.WriteLine("De Que Alumno Desea Modificar Nota...")
+        Console.WriteLine()
+        Console.WriteLine("* Para Seleccionar Un Alumno Debe De Presionar Un Número Que Le Aparece A La Al Lado Del Nombre * ")
+        Console.WriteLine()
+        Nombre = Console.ReadLine '**********************Esta Línea Va A Guardar El Nombre Que La Persona Selecciono Para Cambiarla*****************
+        Console.WriteLine("De Que Clase Desea Modificar Notas...")
+        Console.WriteLine()
+        Console.BackgroundColor = ConsoleColor.Black
+        Console.ForegroundColor = ConsoleColor.Red
+        Console.WriteLine("**************************************************")
+        Console.WriteLine("*    Para La Clase De Física General Presione  1 *")
+        Console.WriteLine("*    para la clase de estadística presione     2 *")
+        Console.WriteLine("*    para la clase de cálculo Presione         3 *")
+        Console.WriteLine("*    para la clase de contabilidad precio      4 *")
+        Console.WriteLine("*    para la clase de programación presione    5 *")
+        Console.WriteLine("**************************************************")
+        Console.WriteLine()
+        Console.BackgroundColor = ConsoleColor.Black
+        Console.ForegroundColor = ConsoleColor.White
+        pedir = Console.ReadLine
+        If pedir = 1 Then '**********************Este If Es Para Pedir De Que Clase Desea Cambiarle La Nota**************************
+            Console.WriteLine("Escriba La Nota Por La Que La Desea Cambiar ")
+            notas(0, Nombre - 1) = Console.ReadLine '**************Esta Línea Es La Que Va A Eliminar La Nota Del Alumno Dependiendo La Clase Que Quiere Modificar La Nota******************
+
+        Else
+            If pedir = 2 Then '**********************Este If Es Para Pedir De Que Clase Desea Cambiarle La Nota**************************
+                Console.WriteLine("Escriba La Nota Por La Que La Desea Cambiar ")
+                notas(1, Nombre - 1) = Console.ReadLine '**************Esta Línea Es La Que Va A Eliminar La Nota Del Alumno Dependiendo La Clase Que Quiere Modificar La Nota******************
+
+            Else
+                If pedir = 3 Then '**********************Este If Es Para Pedir De Que Clase Desea Cambiarle La Nota**************************
+                    Console.WriteLine("Escriba La Nota Por La Que La Desea Cambiar ")
+                    notas(2, Nombre - 1) = Console.ReadLine '**************Esta Línea Es La Que Va A Eliminar La Nota Del Alumno Dependiendo La Clase Que Quiere Modificar La Nota******************
+
+                Else
+                    If pedir = 4 Then '**********************Este If Es Para Pedir De Que Clase Desea Cambiarle La Nota**************************
+                        Console.WriteLine("Escriba La Nota Por La Que La Desea Cambiar ")
+                        notas(3, Nombre - 1) = Console.ReadLine '**************Esta Línea Es La Que Va A Eliminar La Nota Del Alumno Dependiendo La Clase Que Quiere Modificar La Nota******************
+                    Else
+                        If pedir = 5 Then '**********************Este If Es Para Pedir De Que Clase Desea Cambiarle La Nota**************************
+                            Console.WriteLine("Escriba La Nota Por La Que La Desea Cambiar ")
+                            notas(4, Nombre - 1) = Console.ReadLine '**************Esta Línea Es La Que Va A Eliminar La Nota Del Alumno Dependiendo La Clase Que Quiere Modificar La Nota******************
+                        End If
+                    End If
+                End If
+            End If
+        End If
+        Console.WriteLine("El Dato Ha Sido Corregido")
+        Console.WriteLine()
+        notas(5, Nombre - 1) = ((notas(0, Nombre - 1) + notas(1, Nombre - 1) + notas(2, Nombre - 1) + notas(3, Nombre - 1) + notas(4, Nombre - 1))) / 5 '***************esta linea ava asacar el promedio para la modificacion de la nueva nota***************
+        '***************************** Fin De Bloke De Modificar Una Notas A Un Alumno******************
+    End Sub
+    Sub exel()
+        Dim direccion As String = "C:\programacion\" '******************Aquí Escriben La Dirección A Donde Se Guarda¡ El Archivo**************
+        Dim nombrearchivo As String '***************Variable Para Almacenar El Nombre Del Archivo********************
+        Dim ArregloDeEncabezadoPredeterminado() As String = {"Nombre", "Física General", "Estadística", "Calculo", "Contabilidad", "Programación 1", "Promedio"} '************El Nombre Del Arreglo Lo Dice Todo********
+        Console.WriteLine()
+        '****************************************Inicio De La Tabla De Los Arreglos*****************************
+        Console.WriteLine("Esto Es Lo Que Se Enviara A Excel")
+        Console.WriteLine()
+        Console.WriteLine("Nombres" & Chr(09) & "        █" & "Física General " & "█" & "Estadística " & "   █" & "Calculo " & "       █" & "Contabilidad " & "  █" & "Programación 1 " & "█" & "Promedio       ")
+        For y = 0 To 14
+            Console.Write(NOMBRES(y) & Chr(09) & Chr(9) & "█") '*************Areglo Unidimencional*********
+            For x = 0 To 5
+                Console.Write(notas(Chr(9) & x, y) & Chr(09) & Chr(09) & "█") '***************Areglo Bidimencional**************
+            Next
+            Console.WriteLine()
+
+        Next
+        '*****************Fin De La Tabla De Los Arreglos**********************
+
+
+        '************************************Enviar A Excel*******************************
+        Console.WriteLine("Que Nombre Desea Del Archivo...")
+        nombrearchivo = Console.ReadLine()
+        direccion = direccion & nombrearchivo & ".csv"
+        '^ÂVISO^ ***************Dependiendo Su Computadora De Vera De Cambiarle El Punto Y Como A Coma****************************
+
+        For enca = 0 To 6
+            System.IO.File.AppendAllText(direccion, ArregloDeEncabezadoPredeterminado(enca) & " ; ")
+        Next
+        System.IO.File.AppendAllText(direccion, Chr(13)) '************Hacemos El Salto De Línea Para Que Se Haga Otra Línea Con El Chr13***********
+
+
+        For y = 0 To 14 '**************Miren La Línea De Arriba Si No Se Ha Meneado Es La 18***********
+            System.IO.File.AppendAllText(direccion, NOMBRES(y) & ";")
+            For x = 0 To 5 '***********Desen Cuenta Que Es El Mismo Para Mostrar Los Datos, Pero Ahora No Los Mostraremos Los Enviaremos A El Archivo***********
+                System.IO.File.AppendAllText(direccion, notas(x, y) & ";") '************Desen Cuenta Que Tiene Una Coma Para Separar Las Celdas El Excel************
+            Next
+            System.IO.File.AppendAllText(direccion, Chr(13)) '*************Hacemos El Salto De Línea Para Que Se Haga Otra Línea Con El Chr13***********
+        Next
+
+        Console.WriteLine("El Archivo Ha Sido Creado...")
+        Console.WriteLine("Presione Intro Para Seguir...")
+        Console.ReadKey()
+    End Sub
+    Sub Main()
+        '**********************Inicio De Menú *********************************
+        Dim opcion As Integer = 1 '****************Esta Variable Es La Que Va A Permitir Seleccionar Que Opción Deseo Ejecutar******************
+
+        While opcion <> 0 '*************Este While Es El Que Va A Repetir El Menú************************
+            menu()
+            Console.WriteLine("Presione Un Numero De Los Enunciados Que Le Aparecen Arriba")
+            Console.WriteLine()
+            Console.Write("Que Opción Desea... ")
+            opcion = Console.ReadLine '*******************Esta Línea Es La Que Guarda La Opción Escogida Para Buscarla**************
+            Console.WriteLine("************************")
+            '******************Inicio De Las Opciones******************
+            Select Case opcion '*******************Esta Línea Es La Que Hacer El Menú********************
+                Case 0 '***************Este Case Abre Un Mensaje Cuando Ya Va A Salir Del Programa***************
+                    Console.Write("Hasta Luego :) ")
+                Case 1 '**************Este Case Es El Qua Abre El Bloke De Ingresar Nombre*************
+                    ingresar()
+                Case 2 '***************Este Case Es El Qua Abre El Bloke De Ingresar Nota***************
+                    ingresarnota()
+                Case 3 '******************Este Case Es El Qua Abre El Bloke De Mostrar La Tabla De Arreglos****************
+                    mostar()
+                Case 4 '******************************Este Case Es El Qua Abre El Bloke De Modificar Nombres****************
+                    modificard()
+                Case 5 '****************Este Case Es El Qua Abre El Bloke De Modificar Las Cuatro Notas De Un Alumno*****************
+                    modificardnota()
+                Case 6 '*******************Este Case Es El Qua Abre El Bloke De Modificar Una Nota De Un Alumno***************
+                    midificarunanota()
+                Case 7 '********************Este Case Es El Qua Abre El Bloke De Enviar La Tabla A Excel**************************
+                    exel()
+                Case 8 '****************Este Case Es El Que Abre Esta Línea Para Limpiar Pantalla*****************
+                    Console.Clear()
+                Case 9 '************Este Case Muestra El Texto Donde Está Escrito El Dueño Del Programa****************
+                    Console.BackgroundColor = ConsoleColor.Black
+                    Console.ForegroundColor = ConsoleColor.Yellow
+                    Console.WriteLine()
+                    Console.WriteLine()
+                    Console.WriteLine("*****************Cristopher Yorkaef Castillo Hernandez, 000087382*************")
+                    Console.WriteLine()
+                    Console.WriteLine()
+
+            End Select
+
+        End While
+        Console.ReadKey()
+        '*********************Fin Del Menú**********************
+    End Sub
+    Sub menu()
+        '****************Menú Que Se Le Muestra A El Usuario**********************
+        Console.BackgroundColor = ConsoleColor.Black
+        Console.ForegroundColor = ConsoleColor.Red
+        Console.WriteLine("                                   *****************************************************")
+        Console.WriteLine("                                   *          1 - Ingresar Alumnos                     *")
+        Console.WriteLine("                                   *          2 - Ingresar Nota                        *")
+        Console.WriteLine("                                   *          3 - Mostrar Nota                         *")
+        Console.WriteLine("                                   *          4 - Modificar Nombre Del Alumno          *")
+        Console.WriteLine("                                   *          5 - Modificar Todas Las Notas Del Alumno *")
+        Console.WriteLine("                                   *          6 - Modificar Una Nota                   *")
+        Console.WriteLine("                                   *          7 - Para Imprimir En Excel               *")
+        Console.WriteLine("                                   *          8 - Para Limpiar Pantalla                *")
+        Console.WriteLine("                                   *          9 - Para Mostrar Datos Del Creador       *")
+        Console.WriteLine("                                   *          0 - Salir                                *")
+        Console.WriteLine("                                   *****************************************************")
+        Console.BackgroundColor = ConsoleColor.Black
+        Console.ForegroundColor = ConsoleColor.White
+    End Sub
+
+
+End Module
